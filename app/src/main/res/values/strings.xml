@@ -1,3 +1,11 @@
 <resources>
     <string name="app_name">uvenco</string>
+    <string name="screen_name_1">Name screen 1</string>
+    <string name="screen_name_2">Name screen 2</string>
+    <string name="runero_touch">RUNERO Touch</string>
+    <string name="ru">RU</string>
+    <string name="description">Наименование</string>
+    <string name="price">Цена</string>
+    <string name="no_price">Продавать бесплатно</string>
+    <string name="save">Сохранить</string>
 </resources>
