@@ -80,6 +80,5 @@ fun TextFieldApp(
             KeyboardOptions(keyboardType = KeyboardType.Decimal).copy(imeAction = ImeAction.Done) }
         TypeKeyboard.PASS -> {
             KeyboardOptions(keyboardType = KeyboardType.Password).copy(imeAction = ImeAction.Done) }
-        else -> { KeyboardOptions.Default.copy(imeAction = ImeAction.Done) }
     }
 }

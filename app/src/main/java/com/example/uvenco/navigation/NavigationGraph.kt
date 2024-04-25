@@ -31,7 +31,7 @@ fun NavGraphBuilder.catalog( goToScreenConfig: (Int) -> Unit,
         }
     )
 }
-fun NavGraphBuilder.config() {
+fun NavGraphBuilder.config(onBaskScreen: () -> Unit) {
     template(
         routeTo = ConfigDestination.routeWithArgs,
         argument = ConfigDestination.arguments,
