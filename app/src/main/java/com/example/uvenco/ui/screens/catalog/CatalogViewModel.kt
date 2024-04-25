@@ -1,13 +1,10 @@
 package com.example.uvenco.ui.screens.catalog
 
-import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.uvenco.data.DataRepository
 import com.example.uvenco.entity.Coffee
 import com.example.uvenco.entity.ErrorApp
-import com.example.uvenco.service.TimeProvider
-import com.example.uvenco.ui.lg
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow

@@ -1,10 +1,8 @@
 package com.example.uvenco.data
 
 import com.example.uvenco.entity.Coffee
-import com.example.uvenco.entity.TypeCoffee
 import javax.inject.Inject
 import javax.inject.Singleton
-import javax.sql.DataSource
 
 @Singleton
 class DataRepository @Inject constructor(){

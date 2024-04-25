@@ -9,8 +9,4 @@ fun NavHostController.navigateToScreen(route: String) = this.navigate(route) { l
 fun NavHostController.navigateToConfig(id: Int) {
     this.navigateToScreen("${ConfigDestination.route}/$id")
 }
-@Composable
-fun NavHostController.backScreenDestination(): ScreenDestination{
-    return listScreens.find{
-        it.routeWithArgs == this.currentBackStackEntryAsState().value?.destination?.route } ?: DEFAULT_SCREEN
-}
+

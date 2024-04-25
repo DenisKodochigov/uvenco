@@ -4,8 +4,6 @@ import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.Stable
 import androidx.compose.runtime.mutableStateOf
 import com.example.uvenco.entity.Coffee
-import com.example.uvenco.entity.TickTime
-import com.example.uvenco.entity.TypeCoffee
 import javax.inject.Singleton
 
 @Singleton

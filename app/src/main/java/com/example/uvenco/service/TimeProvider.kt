@@ -1,7 +1,6 @@
 package com.example.uvenco.service
 
 import com.example.uvenco.entity.TickTime
-import com.example.uvenco.ui.lg
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.cancel

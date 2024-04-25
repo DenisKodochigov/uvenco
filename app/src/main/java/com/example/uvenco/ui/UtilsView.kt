@@ -11,7 +11,4 @@ fun log(showLog: Boolean, text: String){
 fun lg( text: String){
     Log.d("KDS", text)
 }
-@Composable
-fun ToastApp (text: String){
-    Toast.makeText(LocalContext.current, text, Toast.LENGTH_SHORT).show()
-}
+
