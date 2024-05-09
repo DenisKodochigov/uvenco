@@ -5,6 +5,7 @@ import androidx.lifecycle.viewModelScope
 import com.example.uvenco.data.DataRepository
 import com.example.uvenco.entity.Coffee
 import com.example.uvenco.entity.ErrorApp
+import com.example.uvenco.ui.lg
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -21,13 +22,26 @@ class ConfigViewModel @Inject constructor(
 ): ViewModel() {
     private val _configState = MutableStateFlow(
         ConfigState(
-            onSave = { id, coffee -> onSave(id, coffee)},
+            onSave = { coffee -> onSave(coffee)},
             typesCoffee = emptyList(),))
     val configState: StateFlow<ConfigState> = _configState.asStateFlow()
-    init { templateMy { dataRepository.getTypesCoffee() } }
+    init {
+        viewModelScope.launch(Dispatchers.IO) {
+            dataRepository.getFlowList().collect{
+                _configState.update {
+                    currentState -> currentState.copy( typesCoffee = it.list ) }
+            }
+        }
+    }
 
-    private fun onSave(id: Int, coffee: Coffee){
-        templateMy { dataRepository.onSave(id, coffee) }
+    private fun onSave(coffee: Coffee){
+        lg("ConfigViewModel id: ${coffee.id}")
+        viewModelScope.launch(Dispatchers.IO) {
+            kotlin.runCatching { dataRepository.updateItem( coffee) }.fold(
+                onSuccess = { },
+                onFailure = { errorApp.errorApi(it.message!!) }
+            )
+        }
     }
     private fun templateMy( funDataRepository:() -> List<Coffee> ){
         viewModelScope.launch(Dispatchers.IO) {

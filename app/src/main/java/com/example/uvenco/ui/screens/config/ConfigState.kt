@@ -8,9 +8,8 @@ import javax.inject.Singleton
 
 @Singleton
 data class ConfigState(
-    @Stable var id: Int = 0,
     val coffeeTemp: MutableState<Coffee?> = mutableStateOf(null),
     val enablesButton: MutableState<Boolean>  = mutableStateOf(false),
     @Stable var typesCoffee: List<Coffee> = emptyList(),
-    @Stable var onSave: (Int, Coffee) -> Unit = {_,_->},
+    @Stable var onSave: (Coffee) -> Unit = {},
 )

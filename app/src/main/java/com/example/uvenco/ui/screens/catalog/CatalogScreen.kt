@@ -1,5 +1,6 @@
 package com.example.uvenco.ui.screens.catalog
 
+import android.icu.util.Currency
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
@@ -19,6 +20,7 @@ import androidx.compose.foundation.lazy.grid.items
 import androidx.compose.foundation.lazy.grid.rememberLazyGridState
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
+import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -29,6 +31,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.intl.Locale
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
@@ -110,6 +113,7 @@ fun CatalogScreenCreateView(
             modifier = Modifier.padding(vertical = 20.dp),
         )
         Row (horizontalArrangement = Arrangement.Center,
+            verticalAlignment = Alignment.CenterVertically,
             modifier = Modifier.fillMaxWidth().padding(horizontal = 12.dp, vertical = 12.dp))
         {
             Text(
@@ -122,18 +126,24 @@ fun CatalogScreenCreateView(
                 color = MaterialTheme.colorScheme.onSurface,
                 modifier = Modifier.padding(start = 0.dp),
             )
-            if (coffee.price > 0) {
+            if (coffee.price > 0 && !coffee.free) {
                 Spacer(modifier = Modifier.weight(1f))
-//                val symbol = Currency.getInstance(Locale.current.region).symbol
+//                val symbol = Currency.getInstance("RWF").symbol
                 Text(
-                    text = coffee.price.toString() ,
-                    style = MaterialTheme.typography.titleSmall,
+                    text = coffee.price.toString()  ,
+                    style = MaterialTheme.typography.titleMedium,
                     maxLines = 1,
                     fontWeight = FontWeight.Bold,
                     textAlign = TextAlign.End,
                     color = MaterialTheme.colorScheme.onSecondary,
                     modifier = Modifier.padding(start = 0.dp),
                 )
+                Spacer(modifier = Modifier.width(6.dp))
+                Icon(
+                    modifier = Modifier.size(14.dp),
+                    tint = MaterialTheme.colorScheme.onSecondary,
+                    painter = painterResource(id = R.drawable.rur),
+                    contentDescription = null)
             }
         }
     }

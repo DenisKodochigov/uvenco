@@ -30,6 +30,7 @@ import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.example.uvenco.R
 import com.example.uvenco.domain.toDoubleMy
+import com.example.uvenco.domain.toIntMy
 import com.example.uvenco.entity.TypeCoffee
 import com.example.uvenco.entity.TypeKeyboard
 import com.example.uvenco.ui.lg
@@ -49,12 +50,15 @@ fun ConfigScreen(id: Int){
 {
     lg(" ConfigScreenCreateView")
     val uiState by viewModel.configState.collectAsState()
-    uiState.id = id
+    if (uiState.typesCoffee.isEmpty()) return
+    if (uiState.coffeeTemp.value == null) uiState.coffeeTemp.value = uiState.typesCoffee[id].copy()
+
     ConfigScreenLayout(uiState = uiState)
 }
 @Composable fun ConfigScreenLayout( uiState: ConfigState ){
     lg("  ConfigScreenLayout")
     Column(
+        horizontalAlignment = Alignment.CenterHorizontally,
         modifier = Modifier
             .fillMaxSize()
             .padding(top = 36.dp, start = 12.dp),
@@ -63,8 +67,7 @@ fun ConfigScreen(id: Int){
 }
 @Composable fun CardCoffee( uiState: ConfigState ) {
     lg("   CardCoffee")
-    if (uiState.typesCoffee.isEmpty()) return
-    if (uiState.coffeeTemp.value == null) uiState.coffeeTemp.value = uiState.typesCoffee[uiState.id].copy()
+
     Row{
         Column {
             EditNameCoffee( uiState )
@@ -72,7 +75,7 @@ fun ConfigScreen(id: Int){
             Spacer(modifier = Modifier.height(12.dp))
             EditFreePrice( uiState )
             Button(
-                onClick = { uiState.onSave( uiState.id, uiState.coffeeTemp.value!!) },
+                onClick = { uiState.onSave( uiState.coffeeTemp.value!!) },
                 enabled = uiState.enablesButton.value,
                 shape = shapesApp.small,
                 colors = ButtonDefaults.buttonColors(
@@ -115,7 +118,9 @@ fun ConfigScreen(id: Int){
                 contentDescription = null
         )
         lg("uiState.coffeeTemp.typeCoffee = ${uiState.coffeeTemp.value?.typeCoffee}")
-        uiState.enablesButton.value = uiState.typesCoffee[uiState.id] != uiState.coffeeTemp.value
+        uiState.coffeeTemp.value?.let {
+            uiState.enablesButton.value = uiState.typesCoffee[it.id] != it }
+
         lg("uiState.enablesButton = ${uiState.enablesButton.value}")
         if ( uiState.coffeeTemp.value?.typeCoffee == typeCoffee){
             Image(
@@ -157,10 +162,13 @@ fun ConfigScreen(id: Int){
             textStyle = MaterialTheme.typography.titleLarge,
             typeKeyboard = TypeKeyboard.DIGIT,
             onChangeValue = {
-                uiState.coffeeTemp.value = uiState.coffeeTemp.value?.copy(price = it.toDoubleMy()) }
+                uiState.coffeeTemp.value = uiState.coffeeTemp.value?.copy(price = it.toIntMy()) }
         )
         Spacer(modifier = Modifier.width(12.dp))
-        Icon(painter = painterResource(id = R.drawable.rur), contentDescription = null)
+        Icon(
+            tint = MaterialTheme.colorScheme.onSurface,
+            painter = painterResource(id = R.drawable.rur),
+            contentDescription = null)
     }
 }
 @Composable fun EditFreePrice(uiState: ConfigState){

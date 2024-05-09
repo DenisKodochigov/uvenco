@@ -24,7 +24,7 @@ fun StartApp() {
         val navController = rememberNavController()
         Scaffold(
             modifier = Modifier.semantics { testTagsAsResourceId = true },
-            topBar = { TopBarApp() },
+            topBar = { TopBarApp(backScreen = { navController.popBackStack()}) },
             content = { innerPadding ->
                 NavHostApp(navController = navController, modifier = Modifier.padding(innerPadding))
             }

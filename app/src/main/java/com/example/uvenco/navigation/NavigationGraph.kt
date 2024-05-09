@@ -31,7 +31,7 @@ fun NavGraphBuilder.catalog( goToScreenConfig: (Int) -> Unit,
         }
     )
 }
-fun NavGraphBuilder.config(onBaskScreen: () -> Unit) {
+fun NavGraphBuilder.config() {
     template(
         routeTo = ConfigDestination.routeWithArgs,
         argument = ConfigDestination.arguments,
@@ -52,8 +52,8 @@ fun NavGraphBuilder.template(
         arguments = argument,
         enterTransition = enterTransition,
         exitTransition = exitTransition,
-        popEnterTransition = popEnterTransition,
-        popExitTransition = popExitTransition,
+//        popEnterTransition = popEnterTransition,
+//        popExitTransition = popExitTransition,
         content = content
     )
 }

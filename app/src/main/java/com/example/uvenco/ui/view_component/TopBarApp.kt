@@ -3,6 +3,7 @@ package com.example.uvenco.ui.view_component
 import android.annotation.SuppressLint
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -35,7 +36,7 @@ import com.example.uvenco.service.TimeProvider
 import kotlinx.coroutines.launch
 
 @SuppressLint("CoroutineCreationDuringComposition")
-@Composable fun TopBarApp(){
+@Composable fun TopBarApp(backScreen: ()->Unit = {},){
 
     val scope = rememberCoroutineScope()
     val timeState: MutableState<TickTime> = remember { mutableStateOf(TickTime()) }
@@ -50,6 +51,7 @@ import kotlinx.coroutines.launch
     Row(
         verticalAlignment = Alignment.CenterVertically,
         modifier = Modifier
+            .clickable { backScreen() }
             .height(54.dp)
             .fillMaxWidth()
             .background(color = MaterialTheme.colorScheme.surface)

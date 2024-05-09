@@ -1,6 +1,7 @@
 plugins {
     alias(libs.plugins.androidApplication)
     alias(libs.plugins.jetbrainsKotlinAndroid)
+    alias(libs.plugins.serialization)
     alias(libs.plugins.hilt)
     alias(libs.plugins.ksp)
 }
@@ -72,5 +73,25 @@ dependencies {
     implementation (libs.androidx.hilt.navigation.compose)
     ksp (libs.dagger.compiler)
     ksp (libs.hilt.compiler)
-
+    //DataStore
+    implementation(libs.androidx.datastore)
+//    implementation(libs.androidx.datastore.core)
+    implementation(libs.serialization.json)
+    implementation(libs.immutable)
 }
+
+//
+//protobuf {
+//    protoc {
+//        artifact = "com.google.protobuf:protoc:4.26.1"
+//    }
+//    generateProtoTasks {
+//        all().forEach { task ->
+//            task.builtins {
+//                java {
+//                    option "lite"
+//                }
+//            }
+//        }
+//    }
+//}
