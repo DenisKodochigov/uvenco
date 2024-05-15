@@ -17,6 +17,6 @@ fun NavHostApp(
         modifier = modifier
     ){
         catalog( goToScreenConfig = { navController.navigateToConfig(it) })
-        config ( onBaskScreen = { navController.popBackStack() })
+        config ()
     }
 }
